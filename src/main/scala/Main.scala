@@ -1,7 +1,16 @@
 
+import java.io.File
+
 import org.apache.spark._
 
 object Main extends App {
+
+  def deleteRecursively(file: File): Unit = {
+    if (file.isDirectory)
+      file.listFiles.foreach(deleteRecursively)
+    if (file.exists && !file.delete)
+      throw new Exception(s"Unable to delete ${file.getAbsolutePath}")
+  }
 
   def countWords(sc: SparkContext, inputFileName: String) = {
 
@@ -22,5 +31,9 @@ object Main extends App {
 
   val counts = countWords(sc, "src/main/resources/shakespeare.txt")
 
-  counts.saveAsTextFile("/tmp/shakespeareWordCount")
+  val output = new File("/tmp/shakespeareWordCount")
+
+  deleteRecursively(output)
+
+  counts.saveAsTextFile(output.getAbsolutePath)
 }
