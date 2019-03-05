@@ -1,15 +1,15 @@
+package sample
+
+import org.apache.spark.{SparkConf, SparkContext}
 import org.scalatest.{BeforeAndAfterAll, FunSuite}
-import org.apache.spark.SparkContext
-import org.apache.spark.SparkConf
 
 class WordCountTest extends FunSuite with BeforeAndAfterAll {
 
-  private var sparkConf: SparkConf = _
-  private var sc: SparkContext = _
+  lazy val sparkConf: SparkConf = new SparkConf().setAppName("unit-testing").setMaster("local")
+  lazy val sc: SparkContext = new SparkContext(sparkConf)
 
   override def beforeAll() {
-    sparkConf = new SparkConf().setAppName("unit-testing").setMaster("local")
-    sc = new SparkContext(sparkConf)
+
   }
 
   test("get word count rdd") {

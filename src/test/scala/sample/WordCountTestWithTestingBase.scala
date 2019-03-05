@@ -1,3 +1,5 @@
+package sample
+
 import com.holdenkarau.spark.testing.SharedSparkContext
 import org.scalatest.FunSuite
 

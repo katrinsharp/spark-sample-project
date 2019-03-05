@@ -13,7 +13,10 @@ libraryDependencies ++= {
       ExclusionRule(organization = "org.scalactic"),
       ExclusionRule(organization = "org.scalatest")
     ),
-    "org.apache.spark" %% "spark-hive" % sparkVersion
+    "org.apache.spark" %% "spark-hive" % sparkVersion,
+    "org.apache.spark" % "spark-streaming_2.11" % sparkVersion % "provided",
+    "com.typesafe" % "config" % "1.3.1",
+    "org.jfarcand" % "wcs" % "1.5"
   )
 }
 
@@ -25,9 +28,11 @@ assemblyMergeStrategy in assembly := {
 fork in run := true
 javaOptions in run ++= Seq(
   "-Dlog4j.configuration=log4j.properties")
-fork in Test := true
+fork in Test := false
 javaOptions in Test ++= Seq(
   "-Dlog4j.configuration=log4j.properties")
+
+parallelExecution in Test := false
 
 run in Compile <<= Defaults.runTask(fullClasspath in Compile, mainClass in(Compile, run), runner in(Compile, run))
 runMain in Compile <<= Defaults.runMainTask(fullClasspath in Compile, runner in(Compile, run))

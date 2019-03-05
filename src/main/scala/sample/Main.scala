@@ -1,7 +1,8 @@
+package sample
 
 import java.io.File
 
-import org.apache.spark._
+import org.apache.spark.{SparkConf, SparkContext}
 
 object Main extends App {
 
