@@ -30,7 +30,7 @@ You should see `scala>` after some more updates (Use `:q` for quitting). You're 
 
 # Different ways to execute the code
 
-`sbt "testOnly sample.<name-of-the-test>""` - executes specific test
+`sbt "testOnly sample.<name-of-the-test>"` - executes specific test
 
 `sbt run` - executing Main with Spark in-memory
 
